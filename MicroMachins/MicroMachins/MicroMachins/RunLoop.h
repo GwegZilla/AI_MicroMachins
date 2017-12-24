@@ -20,6 +20,8 @@ namespace aimm
 		DrawableManager* m_opDrawableManager; // all drawables in the game
 		sf::RenderWindow* m_opWindow;
 
+		bool cocoRico;
+
 	public:
 
 		bool m_bIsRunning;

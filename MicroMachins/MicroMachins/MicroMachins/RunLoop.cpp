@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "RunLoop.h"
+#include "imgui.h"
+#include "imgui-SFML.h"
 
 aimm::RunLoop::RunLoop()
 {
@@ -9,6 +11,21 @@ aimm::RunLoop::RunLoop()
 		APPLICATION_NAME);
 	DRAW_MGR->SetRenderWindow(m_opWindow);
 	DRAW_MGR->LoadGraphics();
+
+	// Init ImGUI
+	ImGui::SFML::Init(*m_opWindow);
+
+	// Init menuDebug
+	sft::MenuDebug::Create();
+	sft::MenuDebug::SetEnable(true);
+
+	// sample menuDebug
+	cocoRico = true;
+	if (sft::MenuDebug::OpenDirectory("MyFirstDirectory"))
+	{
+		sft::MenuDebug::AddBool("Test", &cocoRico);
+		sft::MenuDebug::CloseDirectory();
+	}
 
 	m_opEntityMgr = new EntityManager();
 }
@@ -20,7 +37,7 @@ aimm::RunLoop::~RunLoop()
 void aimm::RunLoop::Populate()
 {
 	// add gameplay in managers elements here
-	Car* whiteCar = new Car("whitecar", sf::Vector2f(0.0f, 0.0f));
+	Car* whiteCar = new Car("whitecar", sf::Vector2f(250.0f, 250.0f));
 	m_opEntityMgr->AddEntity(whiteCar);
 }
 
@@ -43,6 +60,9 @@ void aimm::RunLoop::Update()
 
 	// Update the time
 	TIME_MGR->Update();
+
+	// Update menuDebug via IMGUI-SFML
+	ImGui::SFML::Update(TIME_DELTA);
 }
 
 void aimm::RunLoop::Draw()
@@ -51,6 +71,11 @@ void aimm::RunLoop::Draw()
 	// draw the game----
 	DRAW_MGR->DrawAll();
 	//------------------
+
+	PA_TODO("Post Loop");
+	sft::ImGuiRenderMenuDebug();
+	ImGui::Render();
+
 	m_opWindow->display();
 }
 

@@ -35,13 +35,13 @@ void aimm::Car::UpdateSprite()
 	m_oSprite->setPosition(m_v2Position);
 
 	float angle = MATH::RadToDegree(MATH::Vector2fAngle(m_v2Speed));
-	if ((MATH::DotProductVector2f(m_v2Speed, MATH::GetVector2fNormal(MATH::m_v2ReferenceVector))) < 0)
+	if ((MATH::DotProductVector2f(m_v2Speed, MATH::GetVector2fNormal(MATH::m_v2ReferenceVector))) < 0.0f)
 		angle = 360.0f - angle;
 
 	m_oSprite->setRotation(angle);
 }
 
-aimm::Car::Car(std::string l_strKey, sf::Vector2f l_oPosition)
+aimm::Car::Car(const std::string l_strKey, sf::Vector2f l_oPosition)
 {
 	m_oSprite = new sf::Sprite();
 	m_oSprite->getColor();
@@ -49,7 +49,7 @@ aimm::Car::Car(std::string l_strKey, sf::Vector2f l_oPosition)
 	m_oSprite->setScale(0.1f, 0.1f);
 	m_oSprite->setTexture(*DRAW_MGR->GetTexture(l_strKey));
 
-	SetPosition(sf::Vector2f(250.0f, 250.0f));
+	SetPosition(l_oPosition);
 
 	DRAW_MGR->AddDrawable(m_oSprite);
 }

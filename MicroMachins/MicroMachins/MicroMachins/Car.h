@@ -35,7 +35,7 @@ namespace aimm
 		void UpdateSprite();
 
 	public:
-		Car(std::string, sf::Vector2f); // string : texture ID in drawable manager
+		Car(const std::string, sf::Vector2f); // string : texture ID in drawable manager
 		~Car();
 
 		void SetMaxSpeed(float);

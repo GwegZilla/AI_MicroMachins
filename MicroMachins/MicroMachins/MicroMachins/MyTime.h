@@ -13,12 +13,17 @@ namespace aimm
 	private:
 
 		sf::Clock m_oClockDeltaTime;
-		sf::Clock m_oClockAbsoluteTime;
+
+		float m_fAbsoluteTime;
+		float m_fTimeRatio;
 
 	public:
 
-		float GetTimeDelta();
-		float GetTimeAbsolute();
+		const float GetTimeDelta();
+		const float GetTimeAbsolute();
+
+		void SetTimeRatio(float);
+		const void UpdateActions();
 
 		// heritage methods
 		virtual void Start();

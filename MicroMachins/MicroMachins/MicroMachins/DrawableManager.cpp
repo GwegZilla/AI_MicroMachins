@@ -66,8 +66,10 @@ void aimm::DrawableManager::DrawAll()
 {
 	for (int i = 0; i < DRAWABLE_ARRAY_SIZE; ++i)
 	{
-		if (m_arrpDrawables[i] != nullptr
-			&& m_opWindow != nullptr)
+		if (m_opWindow == nullptr)
+			return;
+
+		if (m_arrpDrawables[i] != nullptr)
 		{
 			m_opWindow->draw(*m_arrpDrawables[i]);
 		}
@@ -76,8 +78,10 @@ void aimm::DrawableManager::DrawAll()
 
 void aimm::DrawableManager::DrawElement(int l_iId)
 {
-	if (m_arrpDrawables[l_iId] != nullptr
-		&& m_opWindow != nullptr)
+	if (m_opWindow == nullptr)
+		return;
+
+	if (m_arrpDrawables[l_iId] != nullptr)
 	{
 		m_opWindow->draw(*m_arrpDrawables[l_iId]);
 	}

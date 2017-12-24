@@ -2,7 +2,7 @@
 #include "stdafx.h"
 
 #define MATH aimm::MyMath
-#define NUMBER_PI 3.141592
+#define NUMBER_PI 3.141592f
 
 namespace aimm
 {
@@ -13,6 +13,9 @@ namespace aimm
 		~MyMath();
 
 		static const sf::Vector2f m_v2ReferenceVector;
+
+		static float Min(float, float);
+		static float Max(float, float);
 
 		static float Vector2fMagnitude(sf::Vector2f);
 		static float Vector2fAngle(sf::Vector2f);
