@@ -4,11 +4,14 @@
 #define BLOCKING_ASSERTS
 #define MY_ASSERT(a,b) DebugTools::_assert(a,b,__FUNCTION__,__LINE__)
 
-class DebugTools
+namespace aimm
 {
-public:
-	static const void _assert(const bool, const char*, const char*, const long);
-private:
-	DebugTools();
-	~DebugTools();
-};
+	class DebugTools
+	{
+	public:
+		static const void _assert(const bool, const char*, const char*, const long);
+	private:
+		DebugTools();
+		~DebugTools();
+	};
+}
