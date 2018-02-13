@@ -1,12 +1,12 @@
 #include "stdafx.h"
-/*
+
 int main()
 {
 	aimm::RunLoop l_oRun;
 
-	l_oRun.Populate();
-
 	l_oRun.Start();
+
+	l_oRun.Populate();
 
 	l_oRun.m_bIsRunning = true;
 
@@ -19,9 +19,10 @@ int main()
 	l_oRun.Stop();
 
 	return 0;
-}*/
+}
 
 // alternative main to test
+/*
 int main()
 {
 	b2Vec2 gravity(0, -9.8); //normal earth gravity, 9.8 m/s/s straight down!
@@ -49,3 +50,4 @@ int main()
 	while (1)
 		myWorld->Step(timeStep, velocityIterations, positionIterations);
 }
+*/

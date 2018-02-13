@@ -7,10 +7,18 @@ This class contains each drawable object in the
 */
 namespace aimm
 {
+	// all of Drawables objects are cast as Conditional drawables
+	struct ConditionalDrawable 
+	{
+	public :
+		sf::Drawable* m_poDrawable;
+		bool m_bIsDraw = true;
+	};
+
 	class DrawableManager : public Singleton<DrawableManager>
 	{
 	private:
-		sf::Drawable* m_arrpDrawables[DRAWABLE_ARRAY_SIZE];
+		ConditionalDrawable* m_arrpConditionalDrawables[DRAWABLE_ARRAY_SIZE];
 		sf::RenderWindow* m_opWindow;
 		std::map<std::string, sf::Texture*> m_mpTextures;
 
@@ -22,6 +30,8 @@ namespace aimm
 		void LoadGraphics();
 		void SetRenderWindow(sf::RenderWindow*);
 
+		bool AddDrawable(ConditionalDrawable*);
+		bool AddDrawable(sf::Drawable*, bool);
 		bool AddDrawable(sf::Drawable*);
 		bool RemoveDrawable(int);
 

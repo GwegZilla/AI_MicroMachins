@@ -169,6 +169,7 @@
     <ClInclude Include="MenuDebug.h" />
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="MyTime.h" />
+    <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="RunLoop.h" />
     <ClInclude Include="Singleton.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="MicroMachins.cpp" />
     <ClCompile Include="MyMath.cpp" />
     <ClCompile Include="MyTime.cpp" />
+    <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="RunLoop.cpp" />
     <ClCompile Include="stdafx.cpp">

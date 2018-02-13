@@ -20,13 +20,14 @@ aimm::RunLoop::RunLoop()
 	sft::MenuDebug::SetEnable(true);
 
 	// sample menuDebug
+	/*
 	cocoRico = true;
 	if (sft::MenuDebug::OpenDirectory("MyFirstDirectory"))
 	{
 		sft::MenuDebug::AddBool("Test", &cocoRico);
 		sft::MenuDebug::CloseDirectory();
 	}
-
+	*/
 	m_opEntityMgr = new EntityManager();
 }
 
@@ -46,6 +47,9 @@ void aimm::RunLoop::Start()
 	//initialize time
 	TIME_MGR->Start();
 
+	// Init Physics
+	PHYSIC_MGR->Initialize();
+
 	// starts the game run
 	m_opEntityMgr->Start();
 
@@ -55,6 +59,9 @@ void aimm::RunLoop::Start()
 
 void aimm::RunLoop::Update()
 {
+	// Update the physic
+	PHYSIC_MGR->Update();
+
 	// Update the game
 	m_opEntityMgr->Update();
 

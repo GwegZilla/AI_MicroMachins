@@ -24,13 +24,13 @@ void aimm::DrawableManager::SetRenderWindow(sf::RenderWindow * l_poWindow)
 	m_opWindow = l_poWindow;
 }
 
-bool aimm::DrawableManager::AddDrawable(sf::Drawable * l_poDrawable)
+bool aimm::DrawableManager::AddDrawable(ConditionalDrawable * l_poConditionalDrawable)
 {
 	for (int i = 0; i < ENTITY_ARRAY_SIZE; ++i)
 	{
-		if (m_arrpDrawables[i] == nullptr)
+		if (m_arrpConditionalDrawables[i] == nullptr)
 		{
-			m_arrpDrawables[i] = l_poDrawable;
+			m_arrpConditionalDrawables[i] = l_poConditionalDrawable;
 		}
 		return true;
 	}
@@ -38,12 +38,25 @@ bool aimm::DrawableManager::AddDrawable(sf::Drawable * l_poDrawable)
 	return false;
 }
 
+bool aimm::DrawableManager::AddDrawable(sf::Drawable *l_poDrawable, bool l_bIsDraw)
+{
+	ConditionalDrawable* oConditionalDrawable = new ConditionalDrawable();
+	oConditionalDrawable->m_poDrawable = l_poDrawable;
+	oConditionalDrawable->m_bIsDraw = l_bIsDraw;
+	return AddDrawable(oConditionalDrawable);
+}
+
+bool aimm::DrawableManager::AddDrawable(sf::Drawable *l_poDrawable)
+{
+	return AddDrawable(l_poDrawable, true);
+}
+
 bool aimm::DrawableManager::RemoveDrawable(int l_iIndex)
 {
-	if (m_arrpDrawables[l_iIndex])
+	if (m_arrpConditionalDrawables[l_iIndex])
 	{
-		free(m_arrpDrawables[l_iIndex]);
-		m_arrpDrawables[l_iIndex] = nullptr;
+		free(m_arrpConditionalDrawables[l_iIndex]);
+		m_arrpConditionalDrawables[l_iIndex] = nullptr;
 	}
 	return false;
 }
@@ -69,9 +82,14 @@ void aimm::DrawableManager::DrawAll()
 		if (m_opWindow == nullptr)
 			return;
 
-		if (m_arrpDrawables[i] != nullptr)
+		if (m_arrpConditionalDrawables[i] != nullptr)
 		{
-			m_opWindow->draw(*m_arrpDrawables[i]);
+			// draw object if his drawing is active and if it's not null
+			if (m_arrpConditionalDrawables[i]->m_poDrawable != nullptr
+				&& m_arrpConditionalDrawables[i]->m_bIsDraw == true)
+			{
+				m_opWindow->draw(*m_arrpConditionalDrawables[i]->m_poDrawable);
+			}
 		}
 	}
 }
@@ -81,8 +99,8 @@ void aimm::DrawableManager::DrawElement(int l_iId)
 	if (m_opWindow == nullptr)
 		return;
 
-	if (m_arrpDrawables[l_iId] != nullptr)
+	if (m_arrpConditionalDrawables[l_iId] != nullptr)
 	{
-		m_opWindow->draw(*m_arrpDrawables[l_iId]);
+		m_opWindow->draw(*m_arrpConditionalDrawables[l_iId]->m_poDrawable);
 	}
 }

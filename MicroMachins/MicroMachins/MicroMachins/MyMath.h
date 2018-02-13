@@ -2,7 +2,6 @@
 #include "stdafx.h"
 
 #define MATH aimm::MyMath
-#define NUMBER_PI 3.141592f
 #define DEGTORAD 0.0174532925199432957f
 #define RADTODEG 57.295779513082320876f
 
@@ -27,7 +26,7 @@ namespace aimm
 		static sf::Vector2f ClampVector2f(sf::Vector2f, float);
 		static sf::Vector2f GetVector2fNormal(sf::Vector2f);
 
-		inline static float RadToDegree(float l_fValue) { return l_fValue*180.0f / NUMBER_PI; }
-		inline static float DegreeToRad(float l_fValue) { return l_fValue*NUMBER_PI / 180.0f; }
+		inline static float RadToDegree(float l_fValue) { return l_fValue*180.0f / b2_pi; }
+		inline static float DegreeToRad(float l_fValue) { return l_fValue*b2_pi / 180.0f; }
 	};
 }

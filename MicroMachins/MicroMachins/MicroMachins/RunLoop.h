@@ -3,7 +3,7 @@
 
 #define APPLICATION_NAME "Micro Manchins"
 
-#define WINDOW_COLOR sf::Color(50,50,150)
+#define WINDOW_COLOR sf::Color(50,150,50)
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 #define FRAMERATE_LIMIT 0
@@ -17,7 +17,7 @@ namespace aimm
 	{
 	private:
 		EntityManager* m_opEntityMgr; // all entities in the game
-		DrawableManager* m_opDrawableManager; // all drawables in the game
+		PhysicsManager* m_opPhysicsManager; // all physical objects in game (bodydefs, fixtures, shapes..etc)
 		sf::RenderWindow* m_opWindow;
 
 		bool cocoRico;

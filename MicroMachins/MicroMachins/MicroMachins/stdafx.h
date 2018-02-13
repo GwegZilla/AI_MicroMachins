@@ -49,6 +49,7 @@
 #include "Singleton.h"
 
 #include "DrawableManager.h"
+#include "PhysicsManager.h"
 
 #include "Entity.h"
 #include "EntityManager.h"

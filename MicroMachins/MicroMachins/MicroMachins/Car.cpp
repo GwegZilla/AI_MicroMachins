@@ -14,40 +14,29 @@ void aimm::Car::SetAcceleration(sf::Vector2f)
 {
 }
 
-void aimm::Car::UpdateAcceleration()
-{
-	m_v2Acceleration = MATH::ClampVector2f(m_v2Acceleration, m_fMaxAcceleration);
-}
-
-void aimm::Car::UpdateSpeed()
-{
-	m_v2Speed += m_v2Acceleration * TIME_DELTA;
-	m_v2Speed = MATH::ClampVector2f(m_v2Speed, m_fMaxSpeed);
-}
-
-void aimm::Car::UpdatePosition()
-{
-	m_v2Position += m_v2Speed * TIME_DELTA;
-}
-
 void aimm::Car::UpdateSprite()
 {
-	m_oSprite->setPosition(m_v2Position);
 
-	float angle = MATH::RadToDegree(MATH::Vector2fAngle(m_v2Speed));
-	if ((MATH::DotProductVector2f(m_v2Speed, MATH::GetVector2fNormal(MATH::m_v2ReferenceVector))) < 0.0f)
-		angle = 360.0f - angle;
+	m_oSprite->setPosition(m_oPhysic.GetPosition());
 
-	m_oSprite->setRotation(angle);
+	m_oSprite->setRotation(m_oPhysic.GetRotation());
 }
 
 aimm::Car::Car(const std::string l_strKey, sf::Vector2f l_oPosition)
 {
+	// physics initialisation
+	m_oPhysic.InitializeBody(PHYSIC_MGR->GetBodyDef(CAR_BODY));
+	m_oPhysic.AddFixture(PHYSIC_MGR->GetFixtureDef(CAR_FIXTURE));
+	
+	// graphics initialisation.
 	m_oSprite = new sf::Sprite();
-	m_oSprite->getColor();
-	m_oSprite->setOrigin(0.5f, 0.5f);
-	m_oSprite->setScale(0.1f, 0.1f);
 	m_oSprite->setTexture(*DRAW_MGR->GetTexture(l_strKey));
+	m_oSprite->getColor();
+
+	sf::Vector2u l_vec2Size = m_oSprite->getTexture()->getSize();
+	m_oSprite->setOrigin(l_vec2Size.x * 0.5f, l_vec2Size.y * 0.5f);
+
+	m_oSprite->setScale(0.1f, 0.1f);
 
 	SetPosition(l_oPosition);
 
@@ -74,13 +63,8 @@ void aimm::Car::Start()
 void aimm::Car::Update()
 {
 	Entity::Update();
-	Accelerate(1.0f);
-	TurnLeft(1.0f);
 
-	UpdateAcceleration();
-	UpdateSpeed();
-	UpdatePosition();
-
+	// Box2D updates the physic, so all we have to do is to draw the image of the car on the physical object position.
 	UpdateSprite();
 }
 
@@ -88,6 +72,8 @@ void aimm::Car::Destroy()
 {
 	Entity::Destroy();
 }
+
+// TODO : use Box2D physics in this logic.
 
 void aimm::Car::Accelerate(float l_fIntensity)
 {

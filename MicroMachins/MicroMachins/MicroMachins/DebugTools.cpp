@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DebugTools.h"
 
-const void DebugTools::_assert(const bool l_iExpression, const char * l_arrcMessage, const char * l_arrcFile, const long l_luLine)
+const void aimm::DebugTools::_assert(const bool l_iExpression, const char * l_arrcMessage, const char * l_arrcFile, const long l_luLine)
 {
 	if (l_iExpression)
 	{
@@ -14,10 +14,10 @@ const void DebugTools::_assert(const bool l_iExpression, const char * l_arrcMess
 	return void();
 }
 
-DebugTools::DebugTools()
+aimm::DebugTools::DebugTools()
 {
 }
 
-DebugTools::~DebugTools()
+aimm::DebugTools::~DebugTools()
 {
 }
