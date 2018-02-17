@@ -1,17 +1,9 @@
 #include "stdafx.h"
 #include "Car.h"
 
-void aimm::Car::SetPosition(sf::Vector2f l_v2Vector)
+void aimm::Car::SetPosition(b2Vec2& l_v2Vector)
 {
-	m_v2Position = l_v2Vector;
-}
-
-void aimm::Car::SetSpeed(sf::Vector2f)
-{
-}
-
-void aimm::Car::SetAcceleration(sf::Vector2f)
-{
+	m_oPhysic.SetPosition( l_v2Vector );
 }
 
 void aimm::Car::UpdateSprite()
@@ -19,15 +11,21 @@ void aimm::Car::UpdateSprite()
 
 	m_oSprite->setPosition(m_oPhysic.GetPosition());
 
-	m_oSprite->setRotation(m_oPhysic.GetRotation());
+	m_oSprite->setRotation(m_oPhysic.GetRotationDegree());
+
 }
 
-aimm::Car::Car(const std::string l_strKey, sf::Vector2f l_oPosition)
+aimm::Car::Car(const std::string l_strKey, b2Vec2& l_oPosition, float l_fAngle = 0.0f)
 {
 	// physics initialisation
 	m_oPhysic.InitializeBody(PHYSIC_MGR->GetBodyDef(CAR_BODY));
 	m_oPhysic.AddFixture(PHYSIC_MGR->GetFixtureDef(CAR_FIXTURE));
-	
+	m_oPhysic.InitializeCollidersRendering();
+	m_oPhysic.SetAngle(l_fAngle);
+
+	PHYSIC_MGR->RegisterPhysicObject(&m_oPhysic);
+
+
 	// graphics initialisation.
 	m_oSprite = new sf::Sprite();
 	m_oSprite->setTexture(*DRAW_MGR->GetTexture(l_strKey));
@@ -40,11 +38,12 @@ aimm::Car::Car(const std::string l_strKey, sf::Vector2f l_oPosition)
 
 	SetPosition(l_oPosition);
 
-	DRAW_MGR->AddDrawable(m_oSprite);
+	DRAW_MGR->AddDrawable(m_oSprite, true);
 }
 
 aimm::Car::~Car()
 {
+	free(m_oSprite);
 }
 
 void aimm::Car::SetMaxSpeed(float)
@@ -63,9 +62,15 @@ void aimm::Car::Start()
 void aimm::Car::Update()
 {
 	Entity::Update();
-
 	// Box2D updates the physic, so all we have to do is to draw the image of the car on the physical object position.
 	UpdateSprite();
+
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) == true)
+	{
+		m_oPhysic.InitializeCollidersRendering();
+	}
+
 }
 
 void aimm::Car::Destroy()
@@ -77,24 +82,22 @@ void aimm::Car::Destroy()
 
 void aimm::Car::Accelerate(float l_fIntensity)
 {
-	if (m_v2Acceleration == sf::Vector2f(0.0f, 0.0f))
-		m_v2Acceleration = sf::Vector2f(1.0f, 0.0f);
-	float l_fCurrentMagnitude = MATH::Vector2fMagnitude(m_v2Acceleration);
-	l_fCurrentMagnitude += l_fIntensity * TIME_DELTA;
-	m_v2Acceleration = MATH::NormalizeVector2f(m_v2Acceleration) * l_fCurrentMagnitude;
+	m_oPhysic.ApplyForceToForward(l_fIntensity);
 }
 
 void aimm::Car::Brake(float l_fIntensity)
 {
-	Accelerate(-l_fIntensity*TIME_DELTA);
+	l_fIntensity *= -1.0f;
+	m_oPhysic.ApplyForceToForward(l_fIntensity);
 }
 
 void aimm::Car::TurnLeft(float l_fIntensity)
 {
-	m_v2Acceleration -= l_fIntensity * TIME_DELTA * MATH::GetVector2fNormal(m_v2Acceleration);
+	l_fIntensity *= -1.0f;
+	m_oPhysic.ApplyClockwiseTorque(l_fIntensity);
 }
 
 void aimm::Car::TurnRight(float l_fIntensity)
 {
-	m_v2Acceleration += l_fIntensity * TIME_DELTA * MATH::GetVector2fNormal(m_v2Acceleration);
+	m_oPhysic.ApplyClockwiseTorque(l_fIntensity);
 }

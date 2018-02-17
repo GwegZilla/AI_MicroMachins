@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h" />
+    <ClInclude Include="CarController.h" />
     <ClInclude Include="DebugDefine.h" />
     <ClInclude Include="DebugTools.h" />
     <ClInclude Include="DrawableManager.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="MyTime.h" />
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="PlayerCarController.h" />
     <ClInclude Include="RunLoop.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stb_rect_pack.h" />
@@ -181,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
+    <ClCompile Include="CarController.cpp" />
     <ClCompile Include="DebugDefine.cpp" />
     <ClCompile Include="DebugTools.cpp" />
     <ClCompile Include="DrawableManager.cpp" />
@@ -197,6 +200,7 @@
     <ClCompile Include="MyTime.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="PlayerCarController.cpp" />
     <ClCompile Include="RunLoop.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

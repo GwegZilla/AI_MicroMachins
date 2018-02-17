@@ -7,6 +7,7 @@ bool aimm::EntityManager::AddEntity(Entity* l_poEntity)
 	{
 		if (m_arrpEntities[i] == nullptr)
 		{
+			l_poEntity->SetID(i); // unique ID based on place in entities array
 			m_arrpEntities[i] = l_poEntity;
 			return true;
 		}

@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <cstdio>
 #include <cstddef> // offsetof, NULL
+#include <iostream>
 #include <assert.h>
 #include <tchar.h>
 #include <vector>

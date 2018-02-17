@@ -3,6 +3,9 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 
+#include "PlayerCarController.h"
+
+
 aimm::RunLoop::RunLoop()
 {
 	// only mem allocation here. Game logic should be in start
@@ -37,9 +40,29 @@ aimm::RunLoop::~RunLoop()
 
 void aimm::RunLoop::Populate()
 {
-	// add gameplay in managers elements here
-	Car* whiteCar = new Car("whitecar", sf::Vector2f(250.0f, 250.0f));
+	// add gameplay elements in managers  here
+	// default's car
+
+	Car* redCar = new Car("redcar", b2Vec2(550.0f, 250.0f), 0.0f);
+	m_opEntityMgr->AddEntity(redCar);
+
+	Car* whiteCar = new Car("whitecar", b2Vec2(450.0f, 250.0f), 90.0f);
 	m_opEntityMgr->AddEntity(whiteCar);
+
+	Car* yellowcar = new Car("yellowcar", b2Vec2(550.0f, 450.0f), -45.0f);
+	m_opEntityMgr->AddEntity(yellowcar);
+
+	Car* greencar = new Car("greencar", b2Vec2(800.0f, 300.0f), 45.0f);
+	m_opEntityMgr->AddEntity(greencar);
+
+	Car* blackcar = new Car("blackcar", b2Vec2(750.0f, 500.0f), 90.0f);
+	m_opEntityMgr->AddEntity(blackcar);
+
+
+	// play controller, linked to the default car
+	PlayerCarController* playerController = new PlayerCarController(redCar);
+	m_opEntityMgr->AddEntity(playerController);
+
 }
 
 void aimm::RunLoop::Start()

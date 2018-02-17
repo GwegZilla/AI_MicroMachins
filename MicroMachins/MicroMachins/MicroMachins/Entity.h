@@ -15,7 +15,8 @@ namespace aimm
 		Entity();
 		~Entity();
 
-		virtual int GetID() { return m_iPrivateID; }
+		inline virtual int GetID() { return m_iPrivateID; }
+		inline virtual void SetID(int i) { m_iPrivateID = i; }
 		virtual bool GetIsActive() { return m_bIsActive; }
 		virtual void SetIsActive(bool l_b) { m_bIsActive = l_b; }
 

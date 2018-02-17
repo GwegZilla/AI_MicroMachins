@@ -46,6 +46,12 @@
     <Filter Include="Fichiers d%27en-tête\Other">
       <UniqueIdentifier>{1811adbf-1b85-492c-af5a-b7a598307426}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Controllers">
+      <UniqueIdentifier>{ed4950a6-ad76-4302-896a-4db70fa98bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Controllers">
+      <UniqueIdentifier>{48160255-b1b8-4e54-8c7a-ab241f9d5050}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -59,9 +65,6 @@
     </ClInclude>
     <ClInclude Include="RunLoop.h">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="MyTime.h">
-      <Filter>Fichiers d%27en-tête\Tools</Filter>
     </ClInclude>
     <ClInclude Include="MyMath.h">
       <Filter>Fichiers d%27en-tête\Tools</Filter>
@@ -120,6 +123,15 @@
     <ClInclude Include="DebugDefine.h">
       <Filter>Fichiers d%27en-tête\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="MyTime.h">
+      <Filter>Fichiers d%27en-tête\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCarController.h">
+      <Filter>Fichiers d%27en-tête\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="CarController.h">
+      <Filter>Fichiers d%27en-tête\Controllers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -130,9 +142,6 @@
     </ClCompile>
     <ClCompile Include="RunLoop.cpp">
       <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="MyTime.cpp">
-      <Filter>Fichiers sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="MyMath.cpp">
       <Filter>Fichiers sources\Tools</Filter>
@@ -178,6 +187,15 @@
     </ClCompile>
     <ClCompile Include="DebugDefine.cpp">
       <Filter>Fichiers sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTime.cpp">
+      <Filter>Fichiers sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCarController.cpp">
+      <Filter>Fichiers sources\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="CarController.cpp">
+      <Filter>Fichiers sources\Controllers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

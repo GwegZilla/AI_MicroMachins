@@ -2,8 +2,8 @@
 #include "stdafx.h"
 #include "PhysicObject.h"
 
-#define DEFAULT_MAX_CAR_SPEED 100.0f;
-#define DEFAULT_MAX_CAR_ACCELERATION 1000.0f
+#define DEFAULT_MAX_CAR_SPEED 100.0f
+#define DEFAULT_MAX_CAR_ACCELERATION 100.0f
 
 /*
 * This script is a representation of car controlled by 4 inputs:
@@ -28,22 +28,12 @@ namespace aimm
 		float m_fMaxSpeed = DEFAULT_MAX_CAR_SPEED;
 		float m_fMaxAcceleration = DEFAULT_MAX_CAR_ACCELERATION;
 
-		sf::Vector2f m_v2Position;
-		sf::Vector2f m_v2Speed;
-		sf::Vector2f m_v2Acceleration;
-
-		void SetPosition(sf::Vector2f);
-		void SetSpeed(sf::Vector2f);
-		void SetAcceleration(sf::Vector2f);
-
-		void UpdateAcceleration();
-		void UpdateSpeed();
-		void UpdatePosition();
+		void SetPosition(b2Vec2&);
 
 		void UpdateSprite();
 
 	public:
-		Car(const std::string, sf::Vector2f); // string : texture ID in drawable manager
+		Car(const std::string, b2Vec2&, float); // string : texture ID in drawable manager
 		~Car();
 
 		// accessors & mutators

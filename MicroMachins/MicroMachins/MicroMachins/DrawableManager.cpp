@@ -17,6 +17,11 @@ aimm::DrawableManager::~DrawableManager()
 void aimm::DrawableManager::LoadGraphics()
 {
 	LoadTexture("Assets/Sprites/white_car.png", "whitecar");
+	LoadTexture("Assets/Sprites/black_car.png", "blackcar");
+	LoadTexture("Assets/Sprites/blue_car.png", "bluecar");
+	LoadTexture("Assets/Sprites/green_car.png", "greencar");
+	LoadTexture("Assets/Sprites/red_car.png", "redcar");
+	LoadTexture("Assets/Sprites/yellow_car.png", "yellowcar");
 }
 
 void aimm::DrawableManager::SetRenderWindow(sf::RenderWindow * l_poWindow)
@@ -31,8 +36,8 @@ bool aimm::DrawableManager::AddDrawable(ConditionalDrawable * l_poConditionalDra
 		if (m_arrpConditionalDrawables[i] == nullptr)
 		{
 			m_arrpConditionalDrawables[i] = l_poConditionalDrawable;
+			return true;
 		}
-		return true;
 	}
 
 	return false;
